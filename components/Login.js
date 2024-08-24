@@ -1,21 +1,21 @@
 import Head from "next/head";
 import { ChatIcon } from "@chakra-ui/icons";
 import { Box, Button, Center, Stack } from '@chakra-ui/react'
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithRedirect, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebaseconfi";
 import styles from "../styles/Home.module.css"
 
 export default function Login() {
-  const handleSignInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' });
-    try {
-      await signInWithRedirect(getAuth(), provider);
-    } catch (error) {
-      console.error(error);
-      // handle error
-    }
+ const handleSignInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (error) {
+    console.error(error);
+    // handle error
   }
+}
 
   return (
     <>
